@@ -1,11 +1,7 @@
 {
   "name": "next16-directus-monorepo",
   "private": true,
-  "packageManager": "npm@10.9.0",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "packageManager": "pnpm@9.15.0",
   "scripts": {
     "dev": "turbo dev",
     "build": "turbo build",

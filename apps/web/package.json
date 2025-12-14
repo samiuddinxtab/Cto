@@ -6,7 +6,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "type-gen": "directus-typegen --url http://localhost:8055 --token $SslonXRPKuP8pqajD4EYrWDNcoX9frEI --out src/types/directus.ts",
+    "type-gen:watch": "directus-typegen --url http://localhost:8055 --token $SslonXRPKuP8pqajD4EYrWDNcoX9frEI --out src/types/directus.ts --watch"
   },
   "dependencies": {
     "@directus/sdk": "^18.0.3",
@@ -25,6 +27,7 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@kraftend/directus-typegen": "^1.1.1",
     "@types/node": "^20.17.10",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",

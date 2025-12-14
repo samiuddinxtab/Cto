@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: business_app_postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: directus
+      POSTGRES_PASSWORD: directus_secure_password_change_me
+      POSTGRES_DB: directus
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: business_app_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
+  directus:
+    image: directus/directus:latest
+    container_name: business_app_directus
+    restart: unless-stopped
+    ports:
+      - "8055:8055"
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      KEY: 255d861b-5ea1-5996-9aa3-922530ec40a1
+      SECRET: 6NGZt4ibNLizwRjSd7Js3sfAWyV98uWJ
+      
+      DB_CLIENT: pg
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: directus
+      DB_USER: directus
+      DB_PASSWORD: directus_secure_password_change_me
+      
+      REDIS: redis://redis:6379
+      CACHE_ENABLED: 'true'
+      CACHE_store: redis
+      
+      ADMIN_EMAIL: samiuddinxtab@gmail.com
+      ADMIN_PASSWORD: XcctjKXp3mw3MgB
+      
+      CORS_ENABLED: 'true'
+      CORS_ORIGIN: 'true'
+
+volumes:
+  postgres_data:
